@@ -8,7 +8,7 @@ jobs:
       - run: apt install -y unzip
       - run: wget -O ci-samples.zip https://phucknguyen.s3.us-west-2.amazonaws.com/ci-samples.zip # download zip file from s3
       - run: unzip ci-samples.zip # unzip the downloaded file
-      - run: cd ci-samples/ # go into the unzip folder
+      - run: mv ci-samples/* . # move content out
       - run:
           name: Execute Katalon Studio
           command: katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
