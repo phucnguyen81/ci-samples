@@ -6,17 +6,18 @@ jobs:
     environment:
       DOWNLOAD_URL: https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip
     steps:
-      #- checkout
+      - checkout
       - run:
           name: Download Project from S3
           command: |
-            apt install -y unzip
             wget -O snapshot.zip $DOWNLOAD_URL
-            unzip snapshot.zip
-            #mv snapshot/* .
+            apt install -y unzip
+            unzip snapshot.zip -d snapshot
       - run:
           name: Execute Katalon
-          command: katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
+          command: |
+            cd snapshot/
+            katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
       - store-test_results:
           path: ./report
       - store-artifacts:
