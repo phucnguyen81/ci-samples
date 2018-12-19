@@ -3,14 +3,16 @@ jobs:
   build:
     docker:
       - image: katalonstudio/katalon
+    environment:
+      DOWNLOAD_URL: https://phucknguyen.s3.us-west-2.amazonaws.com/ci-samples.zip
     steps:
-      #- checkout
+      - checkout
       - run:
           name: download project
           command: |
             apt install -y unzip
             # download zip file from s3 (should make the link public)
-            wget -O ci-samples.zip https://phucknguyen.s3.us-west-2.amazonaws.com/ci-samples.zip
+            wget -O ci-samples.zip $DOWNLOAD_URL
             # unzip the downloaded file
             unzip ci-samples.zip
             # move content out
@@ -22,3 +24,11 @@ jobs:
           path: ./report
       - store-artifacts:
           path: ./report
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: bar
