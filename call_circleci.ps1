@@ -7,9 +7,14 @@ $headers = @{
 }
 
 $body = @{
-  build_parameters: @{
-    DOWNLOAD_URL: 'https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip'
+  build_parameters = @{
+    DOWNLOAD_URL = 'https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip'
   }
 }
 
-Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $body
+$bodyJson = $body | ConvertTo-Json
+
+Invoke-RestMethod -Uri $uri `
+  -Method Post `
+  -Headers $headers  `
+  -Body $bodyJson
