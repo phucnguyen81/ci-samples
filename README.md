@@ -1,9 +1,10 @@
-Samples for Docker images at https://github.com/katalon-studio/docker-images.
+# Description
+Project to kick off ci jobs to run katalon on circleci.
 
-# Katalon Studio
+Project repository:
+https://github.com/phucnguyen81/ci-samples
 
-    cd <project_root_directory>
-    ./katalon/run_chrome.sh
-    ./katalon/run_firefox.sh
-    
-If you are running the sample in Windows, also see issue #2.
+CircleCI personal token:
+8b9386241a753945fdc583d796f5ece55d861039
+
+
