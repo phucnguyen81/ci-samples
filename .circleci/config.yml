@@ -5,7 +5,7 @@ jobs:
       - image: katalonstudio/katalon
     environment:
       DOWNLOAD_URL: https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip
-      COMMAND: "katalon-execute.sh -browserType=\"Chrome\" -retry=0 -statusDelay=15 -testSuitePath=\"Test Suites/TS_RegressionTest\""
+      COMMAND: katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
     steps:
       - checkout
       - run:
@@ -18,7 +18,7 @@ jobs:
           name: Execute Katalon
           command: |
             cd snapshot/
-            $COMMAND
+            eval "$COMMAND"
       - store-test_results:
           path: ./report
       - store-artifacts:
