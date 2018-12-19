@@ -1,6 +1,21 @@
 # Kick off a build on circleci
 
-$uri = 'https://circleci.com/api/v1.1/project/github/phucnguyen81/ci-samples?circle-token=8b9386241a753945fdc583d796f5ece55d861039'
+# Script parameters
+param (
+  [string]$token = $env:CIRCLECI_TOKEN
+)
+
+If ([string]::IsNullOrEmpty($token)) {
+  throw "Token is required as parameter or env variable CIRCLECI_TOKEN"
+}
+
+# fail on first error (e.g. directory not exist)
+$ErrorActionPreference = "Stop"
+
+$uriBase = "https://circleci.com/api/v1.1/project/github"
+$username = "phucnguyen81"
+$project = "ci-samples"
+$uri = "${uriBase}/${username}/${project}?circle-token=${token}"
 
 $headers = @{
   'Content-Type' = 'application/json'
@@ -15,7 +30,5 @@ $body = @{
 
 $bodyJson = $body | ConvertTo-Json
 
-Invoke-RestMethod -Uri $uri `
-  -Method Post `
-  -Headers $headers  `
-  -Body $bodyJson
+Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -Body $bodyJson
+
