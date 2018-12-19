@@ -11,12 +11,14 @@ jobs:
       - run:
           name: Download Project from S3
           command: |
+            set -o nounset
             wget -O snapshot.zip $DOWNLOAD_URL
             apt install -y unzip
             unzip snapshot.zip -d snapshot
       - run:
           name: Execute Katalon
           command: |
+            set -o nounset
             cd snapshot/
             eval "$COMMAND"
       - store-test_results:
