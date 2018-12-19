@@ -8,17 +8,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: download project
+          name: Download Project from S3
           command: |
             apt install -y unzip
-            # download zip file from s3 (should make the link public)
-            wget -O ci-samples.zip $DOWNLOAD_URL
-            # unzip the downloaded file
-            unzip ci-samples.zip
-            # move content out
-            mv ci-samples/* .
+            wget -O snapshot.zip $DOWNLOAD_URL
+            unzip snapshot.zip
+            mv snapshot/* .
       - run:
-          name: execute katalon headless
+          name: Execute Katalon
           command: katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
       - store-test_results:
           path: ./report
