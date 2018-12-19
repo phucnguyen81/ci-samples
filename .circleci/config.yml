@@ -24,11 +24,3 @@ jobs:
           path: ./report
       - store-artifacts:
           path: ./report
-
-version: 2
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
