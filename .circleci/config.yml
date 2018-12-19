@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: katalonstudio/katalon
     environment:
-      DOWNLOAD_URL: https://phucknguyen.s3.us-west-2.amazonaws.com/ci-samples.zip
+      DOWNLOAD_URL: https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip
     steps:
       - checkout
       - run:
@@ -13,7 +13,7 @@ jobs:
             apt install -y unzip
             wget -O snapshot.zip $DOWNLOAD_URL
             unzip snapshot.zip
-            mv snapshot/* .
+            #mv snapshot/* .
       - run:
           name: Execute Katalon
           command: katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
