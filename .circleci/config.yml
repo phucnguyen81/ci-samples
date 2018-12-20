@@ -6,8 +6,14 @@ jobs:
     environment:
       # DOWNLOAD_URL: https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip
       # COMMAND: katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"
+      # ENVIRONMENT_VARIABLES: not used yet
     steps:
       - checkout
+      - run:
+          name: Show environment variables
+          command: |
+            set -o nounset
+            echo $ENVIRONMENT_VARIABLES
       - run:
           name: Download Project from S3
           command: |
