@@ -25,7 +25,9 @@ $body = @{
   build_parameters = @{
     DOWNLOAD_URL = 'https://phucknguyen-bucket.s3.amazonaws.com/ci-samples-2.zip'
     COMMAND = 'katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"'
-    ENVIRONMENT_VARIABLES = ''
+    ENVIRONMENT_VARIABLES = @{
+      BUILD_MARKER = 'Nothing yet, just need a single variable'
+    }
   }
 }
 
